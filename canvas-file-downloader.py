@@ -2,6 +2,7 @@ import csv
 import json
 
 from canvasapi import Canvas
+from urllib.request import urlretrieve
 
 # Canvas API URL
 API_URL = "https://smu.instructure.com/"
@@ -38,3 +39,14 @@ if students_to_grade:
     }
 else:
     students_to_grade = {student.name: student.id for student in all_students}
+
+# Download submissions
+for student in students_to_grade:
+    # Get all attachments from submission and download them
+    student_id = students_to_grade[student]
+    submission = assignment.get_submission(student_id)
+    for attachment in submission.attachments:
+        urlretrieve(
+            attachment.url,
+            f"submissions/{student}.zip",
+        )
