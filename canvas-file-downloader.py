@@ -11,7 +11,7 @@ with open("canvas-details.json", "r") as file:
     data = json.load(file)
 TOKEN = data["Token"]
 course_ID = data["Course ID"]
-assignment_ID = data["Assingment ID"]
+assignment_ID = data["Assignment ID"]
 
 # Initialize Canvas objects
 canvas = Canvas(API_URL, TOKEN)
